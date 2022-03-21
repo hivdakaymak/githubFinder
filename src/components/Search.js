@@ -17,13 +17,13 @@ export class Search extends Component {
   onSubmit(e) {
     e.preventDefault();
     this.props.searchUsers(this.state.keyword);
-    this.setState({keyword: ''});
+    this.setState({ keyword: "" });
   }
 
   render() {
     return (
-      <form onSubmit="this.onSubmit">
-        <div className="container my-3">
+      <div className="container my-3">
+        <form onSubmit="this.onSubmit">
           <div className="input-group">
             <input
               type="text"
@@ -37,8 +37,16 @@ export class Search extends Component {
               </button>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+        {this.props.showClearButton && 
+          <button
+            onClick={this.props.clearUsers}
+            className="btn btn-secondary btn-sm mt-2 btn-block"
+          >
+            Clear Results
+          </button>
+        }
+      </div>
     );
   }
 }
