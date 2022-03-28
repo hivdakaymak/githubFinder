@@ -2,9 +2,9 @@ import React from "react";
 
 
 const About = () => (
-    <header>
+    <div className="container">
       <h1>About Page </h1>
-    </header>
+    </div>
   );
   
   export default About;

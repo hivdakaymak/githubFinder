@@ -4,9 +4,10 @@ import Navbar from "./Navbar";
 import Users from "./Users";
 import Search from "./Search";
 import Alert from "./Alert";
-import About from "./About";
+import About from "./About";    
 
 import axios from "axios";
+import UserDetails from "./UserDetails";
 
 export class App extends Component {
   constructor(props) {
@@ -14,9 +15,11 @@ export class App extends Component {
     this.searchUsers = this.searchUsers.bind(this);
     this.clearUsers = this.clearUsers.bind(this);
     this.setAlert = this.setAlert.bind(this);
+    this.getUser = this.setAlert.bind(this);
     this.state = {
       loading: false,
       users: [],
+      user:{},
       alert: null,
     };
   }
@@ -30,6 +33,19 @@ export class App extends Component {
           this.setState({ users: res.data.items, loading: false })
         );
     }, 1000);
+  }
+
+  getUser(username){
+      this.setState({loading:true});
+
+      etTimeout(() => {
+        axios
+          .get(`https://api.github.com/users/${username}`)
+          .then((res) =>
+            this.setState({ user: res.data.items, loading: false })
+          );
+      }, 1000);
+
   }
 
   clearUsers() {
@@ -51,7 +67,7 @@ export class App extends Component {
         <Alert alert={this.state.alert} />
         <Switch>
           <Route
-          exact
+            exact 
             path="/"
             render={(props) => (
               <>
@@ -66,6 +82,10 @@ export class App extends Component {
             )}
           />
           <Route path="/about" component={About} />
+          <Route path="/user/:login"  render = {props => (
+               <UserDetails {...props} getUser={this.getUser} user={this.state.user}/>
+          )}/>
+
         </Switch>
       </BrowserRouter>
     );
