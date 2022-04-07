@@ -1,13 +1,14 @@
 import React, {useState} from 'react'
 
-const Search =({searchUsers,setAlert,showClearButton,clearUsers}) => {
-    const [keyword, setKeyword] = useState('');
-   
-    const onChange=(e) => {
-        setKeyword(e.target.value)
+const Search = ( {searchUsers,setAlert,showClearButton,clearUsers} ) => {
+        
+    const [keyword,setKeyword] = useState('');   
+
+    const onChange = (e) => {
+        setKeyword(e.target.value);
     }
 
-    const onSubmit=(e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
 
         if(keyword === '') {
@@ -18,24 +19,24 @@ const Search =({searchUsers,setAlert,showClearButton,clearUsers}) => {
         }      
     }
 
+    
+    return (
+        <div className="container my-3">
 
-        return (
-            <div className="container my-3">
-
-                <form onSubmit={onSubmit}>
-                        <div className="input-group">
-                            <input type="text" value={keyword} onChange={onChange} className="form-control" />
-                            <div className="input-group-append">
-                                <button type="submit" className="btn btn-primary">Search</button>
-                            </div>
+            <form onSubmit={onSubmit}>
+                    <div className="input-group">
+                        <input type="text" value={keyword} onChange={onChange} className="form-control" />
+                        <div className="input-group-append">
+                            <button type="submit" className="btn btn-primary">Search</button>
                         </div>
-                </form>
-                {
-                    showClearButton && <button onClick={clearUsers} className="btn btn-secondary btn-sm btn-block mt-2">Clear Results</button>
-                }
-                </div>
-        )
-    }
-
+                    </div>
+            </form>
+            {
+                showClearButton && <button onClick={clearUsers} className="btn btn-secondary btn-sm btn-block mt-2">Clear Results</button>
+            }
+            </div>
+    )
+    
+}
 
 export default Search

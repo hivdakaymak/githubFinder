@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 
 // class App extends Compenent {
@@ -9,6 +9,15 @@ import ReactDOM from "react-dom";
 //       text: '',
 //     };
 //   }
+
+//   compenentDidMount(){
+
+//   }
+
+//   compenentDidUpdated(){
+
+// }
+
 //   render() {
 //     return (
 //       <div>
@@ -24,6 +33,27 @@ import ReactDOM from "react-dom";
 const App = (props) => {
     const [count, setCount] = useState(props.count);
     const [text, setText] = useState(props.text);
+
+    useEffect(()=>{
+        console.log("text")
+    },[text])
+    
+    useEffect(()=>{
+        console.log("count")
+        localStorage.setItem('count', count)
+    },[count])
+
+    useEffect(()=>{
+        console.log("CompenentDidMounth")
+        const countData = localStorage.getItem('count');
+        if(count){
+            setCount(Number(countData))
+        }
+    },[])
+
+    useEffect(()=>{
+        console.log("CompenentDidMounth- CompenentUpdatedMounth")
+    })
     return (
         <div> 
             <p>Butona {count} Kez Tıklandı.</p>
@@ -42,6 +72,6 @@ const App = (props) => {
 App.defaultProps = {
     count: 5,
     text: 'defult',
-}
+} 
 
 ReactDOM.render(<App />, document.getElementById("root"));
