@@ -40,7 +40,7 @@ const App = (props) => {
     
     useEffect(()=>{
         console.log("count")
-        localStorage.setItem('count', count)
+        localStorage.setItem('count', count  )
     },[count])
 
     useEffect(()=>{
