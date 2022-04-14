@@ -7,7 +7,7 @@ const UserDetails = ({getUser,getUserRepos, match, loading, repos, user}) => {
     useEffect(() =>{
         getUser(match.params.login);
         getUserRepos(match.params.login);
-    })
+    },[])
 
         const {name,avatar_url,location,html_url,bio,blog,followers,following,public_repos} = user;
  
