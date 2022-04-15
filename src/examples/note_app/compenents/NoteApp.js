@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useReducer } from "react";
-
+import notesReducer from '../reducer/notes';
+import Form from "./Form";
+import Note from './Note';
 
 const NoteApp = () => {
     //   const [notes, setNotes] = useState([]);
@@ -22,25 +24,7 @@ const NoteApp = () => {
       },[notes])
     
     
-      const addNote = (e) => {
-          e.preventDefault();
-          if(title) {
-            //   setNotes([
-            //       ...notes,
-            //       {title,body}
-            //   ])
-            dispatch({
-                type:'ADD_NOTE',
-                title,
-                body
-            })
-              setTitle('')
-              setBody('')
-    
-          }
-          
-    
-      }
+     
     
       const removeNote = (title) => {
         //   setNotes(notes.filter((note) => note.title !== title))
@@ -61,20 +45,7 @@ const NoteApp = () => {
                     <table className="table table-sm table-striped mb-0">
                         <tbody>
                             {
-                                notes.map((note) => (
-                                    <tr style={{width: '40%'}} key={note.title}>
-                                        <td>
-                                            {note.title}
-                                        </td>
-                                        <td>
-                                            {note.body}
-                                        </td>
-                                        <td style={{width: '3%'}}>
-                                          <button onClick={() => removeNote(note.title)} className="btn btn-sm btn-danger"></button>
-                                          <i className="far fa-times"></i>
-                                        </td>
-                                    </tr>
-                                ))
+                               <NoteList notes={notes} removeNote={removeNote}/>
                             }
                         </tbody> 
                     </table>
@@ -85,15 +56,11 @@ const NoteApp = () => {
           <div className="card mb-3">
             <div className="card-header">Add a New Note</div>
             <div className="card-body">
-                <form onSubmit={addNote}>
-                <div className="form-group"> 
-                    <input value={title} onChange={(e) =< setTitle(e.target.value)} className="form-control"/>
-                </div>
-                <div className="form-group"> 
-                    <textarea value={body} onChange={(e) =< setBody(e.target.value)} className="form-control"> </textarea>
-                </div>
-                <button className="btn btn-primary btn-block">Add Note<button/>
-                </form>
+              
+              <Form/> 
+
+
+
             </div>
           </div>
           
@@ -102,3 +69,15 @@ const NoteApp = () => {
       );
     };
     
+
+export default NoteApp
+
+
+
+
+
+
+
+
+
+
