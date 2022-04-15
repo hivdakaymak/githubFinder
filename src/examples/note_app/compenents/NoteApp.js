@@ -57,7 +57,7 @@ const NoteApp = () => {
             <div className="card-header">Add a New Note</div>
             <div className="card-body">
               
-              <Form/> 
+              <Form dispatch={dispatch}/> 
 
 
 

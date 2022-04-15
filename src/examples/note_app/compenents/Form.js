@@ -1,7 +1,11 @@
 import React from "react";
+import React, { useState,useContext} from "react";
+import notesContext from "../context/notes-context"
+ 
 
 
-const Form = () =>{
+const Form = ({dispatch}) =>{
+    const {notes,dispatch} =  useContext(notesContext)
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
 
@@ -24,17 +28,20 @@ const Form = () =>{
         
   
     }
+
+    
     return(
         <>
         <form onSubmit={addNote}>
             <div className="form-group"> 
-                <input value={title} onChange={(e) =< setTitle(e.target.value)} className="form-control"/>
+                <input value={title} onChange={(e) => setTitle(e.target.value)} className="form-control"/>
             </div>
             <div className="form-group"> 
-                <textarea value={body} onChange={(e) =< setBody(e.target.value)} className="form-control"> </textarea>
+                <textarea value={body} onChange={(e) => setBody(e.target.value)} className="form-control"> </textarea>
             </div>
-            <button className="btn btn-primary btn-block">Add Note<button/>
-        </form></>
+            <button className="btn btn-primary btn-block"> Add Note </button>
+        </form>
+        </>
     )
 }
 
