@@ -4,8 +4,8 @@ import notesContext from "../context/notes-context"
  
 
 
-const Form = ({dispatch}) =>{
-    const {notes,dispatch} =  useContext(notesContext)
+const Form = () =>{
+    const {dispatch} =  useContext(notesContext)
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
 

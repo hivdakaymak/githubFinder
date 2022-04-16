@@ -1,9 +1,13 @@
 import React from "react"
 import Note from "./Note"
-const NoteList = ({notes,removeNote}) =>{
+import NotesContext from "../context/notes-context"
+import notesContext from "../context/notes-context"
+
+ 
+const NoteList = () =>{
     return (
         notes.map((note) => (
-            <Note key={note.title} note={note} removeNote={removeNote}/>
+            <Note key={note.title} note={note}/>
         ))
     )
 } 

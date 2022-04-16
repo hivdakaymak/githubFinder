@@ -2,6 +2,7 @@ import React, { useState, useEffect, useReducer } from "react";
 import notesReducer from '../reducer/notes';
 import Form from "./Form";
 import Note from './Note';
+import NotesContext from '../context/notes-context';
 
 const NoteApp = () => {
     //   const [notes, setNotes] = useState([]);
@@ -24,19 +25,9 @@ const NoteApp = () => {
       },[notes])
     
     
-     
-    
-      const removeNote = (title) => {
-        //   setNotes(notes.filter((note) => note.title !== title))
-        dispatch({
-            type: 'REMOVE_NOTE',
-            title
-        })
-    
-      }
-      
-    
+ 
       return (
+        <NotesContext.Provider value={{notes,dispatch}}>
         <div className="container p-5">
           <div className="card mb-3">
             <div className="card-header">Notes</div>
@@ -45,27 +36,22 @@ const NoteApp = () => {
                     <table className="table table-sm table-striped mb-0">
                         <tbody>
                             {
-                               <NoteList notes={notes} removeNote={removeNote}/>
+                               <NoteList />
                             }
                         </tbody> 
                     </table>
                 )
             }
           </div>
-    
           <div className="card mb-3">
             <div className="card-header">Add a New Note</div>
             <div className="card-body">
-              
-              <Form dispatch={dispatch}/> 
-
-
-
+              <Form/> 
             </div>
           </div>
-          
-    
         </div>
+
+        </NotesContext.Provider>
       );
     };
     
