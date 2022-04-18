@@ -1,6 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
+import GithubContex from '../context/githubContext';
 
-const Search = ( {searchUsers,setAlert,showClearButton,clearUsers} ) => {
+const Search = ( {setAlert,showClearButton,clearUsers} ) => {
+
+    const githubContext = useContext(GithubContex)
         
     const [keyword,setKeyword] = useState('');   
 
@@ -14,7 +17,7 @@ const Search = ( {searchUsers,setAlert,showClearButton,clearUsers} ) => {
         if(keyword === '') {
             setAlert('lütfen bir anahtar kelime giriniz.','danger');
         } else {
-            searchUsers(keyword);
+            GithubContex.searchUsers(keyword);
             setKeyword('');
         }      
     }

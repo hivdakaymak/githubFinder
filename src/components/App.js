@@ -7,6 +7,7 @@ import Alert from "./Alert";
 import About from "./About";
 import axios from "axios";
 import UserDetails from "./UserDetails";
+import GithubState from "../context/githubState";
 
 const App = () => {
   const [users, setUsers] = [];
@@ -14,18 +15,6 @@ const App = () => {
   const [loading, setloading] = false;
   const [repos, setRepos] = null;
   const [alert, setAlert] = [];
-
-  const searchUsers = (keyword) => {
-    setloading(true);
-    setTimeout(() => {
-      axios
-        .get(`https://api.github.com/search/users?q=${keyword}`)
-        .then((res) => {
-          setUsers(res.data.items);
-          setloading(false);
-        });
-    }, 1000);
-  };
 
   getUser = (username) => {
     setloading(true);
@@ -62,6 +51,7 @@ const App = () => {
   };
 
   return (
+    <GithubState>
     <BrowserRouter>
       <Navbar />
       <Alert alert={this.state.alert} />
@@ -72,7 +62,6 @@ const App = () => {
           render={(props) => (
             <>
               <Search
-                searchUsers={searchUsers}
                 clearUsers={clearUsers}
                 showClearButton={users.length > 0 ? true : false}
                 setAlert={showAlert}
@@ -97,6 +86,7 @@ const App = () => {
         />
       </Switch>
     </BrowserRouter>
+    </GithubState>
   );
 };
 
