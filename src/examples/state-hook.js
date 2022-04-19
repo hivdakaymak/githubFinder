@@ -3,17 +3,26 @@
 
 // 16.8: function component + hook => stateful function component
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 
 // class App extends Component {
 //     constructor(props) {
 //         super(props);
 //         this.state = {
-//             count: 0,
+//             count: 0, 
 //             text: ''
 //         }
 //     }
+
+//     componentDidMount() {
+//         console.log('componentdidmount');
+//     }
+
+//     componentDidUpdate() {
+//         console.log('componentDidUpdate');
+//     }
+
 //     render() {
 //         return (
 //             <div>
@@ -27,6 +36,33 @@ import ReactDOM from 'react-dom'
 const App = (props) => {
     const [count,setCount] = useState(props.count);
     const [text,setText] = useState(props.text);
+
+    // text
+    useEffect(()=> {
+        console.log('text')
+    }, [text]) 
+
+    // count
+    useEffect(()=> {
+        console.log('count')
+        localStorage.setItem('count', count)
+    }, [count])
+
+    // componentdidmount
+    useEffect(()=> {
+        console.log('componentdidmount')
+
+        const countData = localStorage.getItem('count');
+
+        if(countData) {
+            setCount(Number(countData))
+        }
+    }, [])
+
+    // componentdidmount(), componentdidupdate()
+    useEffect(()=> {
+        console.log('componentdidmount - componentdidupdate'); 
+    })
 
     return ( 
         <div>
@@ -42,7 +78,7 @@ const App = (props) => {
 
 App.defaultProps = {
     count: 5,
-    text: 'ss'
+    text: 'deneme'
 }
 
-ReactDOM.render(<App count={7}/>, document.getElementById('root'));
+ReactDOM.render(<App/>, document.getElementById('root'));
