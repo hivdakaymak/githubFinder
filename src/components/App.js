@@ -8,8 +8,9 @@ import About from "./About";
 import UserDetails from "./UserDetails";
 import GithubState from "../context/github/githubState";
 import AlertState from "../context/alert/alertState";
+import Notfound from './NotFound';
 
-const App = () => {
+const App = () => { 
   return (
     <GithubState>
       <AlertState>
@@ -20,15 +21,13 @@ const App = () => {
             <Route
               exact
               path="/"
-              render={(props) => (
-                <>
-                  <Search/>
-                  <Users />
-                </>
-              )}
+              component={Home}
+            
             />
             <Route path="/about" component={About} />
             <Route path="/user/:login" component={userDetails} />
+            <Route component={Notfound} />
+
           </Switch>
         </BrowserRouter>
       </AlertState>
