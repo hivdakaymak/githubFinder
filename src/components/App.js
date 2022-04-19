@@ -66,7 +66,7 @@ const App = () => {
                 showClearButton={users.length > 0 ? true : false}
                 setAlert={showAlert}
               />
-              <Users users={users} loading={loading} />
+              <Users/>
             </>
           )}
         />
@@ -77,7 +77,7 @@ const App = () => {
             <UserDetails
               {...props}
               getUser={getUser}
-              getUserRepos={getUserRepos}
+              getUserRepos={getUserRepos} 
               user={user}
               repos={repos}
               loading={loading}
