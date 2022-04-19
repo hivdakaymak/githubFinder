@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react'
-import GithubContext from '../context/githubContext'
+import GithubContext from '../context/github/githubContext'
 
 const Search = ( {setAlert} ) => {
 
